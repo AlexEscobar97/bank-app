@@ -1,6 +1,6 @@
 # Bank App (Java Spring Boot + Angular 18)
 
-Aplicación full-stack para gestión bancaria básica:
+Gestión bancaria básica:
 - **Clientes**
 - **Cuentas**
 - **Movimientos** (crédito / débito con reglas de negocio)
