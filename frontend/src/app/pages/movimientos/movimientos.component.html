@@ -1,0 +1,68 @@
+<h2>Movimientos</h2>
+
+<div class="error" *ngIf="errorMsg">{{ errorMsg }}</div>
+
+<input [(ngModel)]="filtro" placeholder="Buscar" class="input" />
+
+<div class="form">
+  <div class="row">
+    <label>Fecha</label>
+    <input class="input" type="date" [(ngModel)]="form.fecha" name="fecha" />
+  </div>
+
+  <div class="row">
+    <label>Tipo</label>
+    <select class="input" [(ngModel)]="form.tipoMovimiento" name="tipoMovimiento">
+      <option [ngValue]="'CREDITO'">Crédito (Depósito)</option>
+      <option [ngValue]="'DEBITO'">Débito (Retiro)</option>
+    </select>
+  </div>
+
+  <div class="row">
+    <label>Valor</label>
+    <input class="input" type="number" [(ngModel)]="form.valor" name="valor" />
+  </div>
+
+  <div class="row">
+    <label>Cuenta</label>
+    <select class="input" [(ngModel)]="form.numeroCuenta" name="numeroCuenta">
+      <option [ngValue]="''">-- Seleccione --</option>
+      <option *ngFor="let c of cuentas" [ngValue]="c.numeroCuenta">
+        {{ c.numeroCuenta }} - {{ c.tipoCuenta }}
+      </option>
+    </select>
+  </div>
+
+  <div class="actions">
+    <button (click)="guardar()">Guardar</button>
+    <button (click)="limpiar()">Limpiar</button>
+  </div>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Fecha</th>
+      <th>Tipo</th>
+      <th>Valor</th>
+      <th>Cuenta</th>
+      <th>Saldo Disponible</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let m of movimientosFiltrados()">
+      <td>{{ m.id }}</td>
+      <td>{{ m.fecha }}</td>
+      <td>{{ m.tipoMovimiento }}</td>
+      <td>{{ m.valor }}</td>
+      <td>{{ m.cuenta?.numeroCuenta || '-' }}</td>
+      <td>{{ m.saldoDisponible }}</td>
+      <td>
+        <button (click)="eliminar(m.id)">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

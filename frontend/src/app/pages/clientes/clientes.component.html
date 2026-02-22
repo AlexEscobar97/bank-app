@@ -1,0 +1,89 @@
+<h2>Clientes</h2>
+
+<div class="error" *ngIf="errorMsg">{{ errorMsg }}</div>
+
+<input [(ngModel)]="filtro" placeholder="Buscar" class="input" />
+
+<div class="form">
+  <div class="row">
+    <label>Nombre</label>
+    <input class="input" [(ngModel)]="form.nombre" name="nombre" />
+  </div>
+
+  <div class="row">
+    <label>Género</label>
+    <input class="input" [(ngModel)]="form.genero" name="genero" />
+  </div>
+
+  <div class="row">
+    <label>Edad</label>
+    <input class="input" type="number" [(ngModel)]="form.edad" name="edad" />
+  </div>
+
+  <div class="row">
+    <label>Identificación</label>
+    <input class="input" [(ngModel)]="form.identificacion" name="identificacion" />
+  </div>
+
+  <div class="row">
+    <label>Dirección</label>
+    <input class="input" [(ngModel)]="form.direccion" name="direccion" />
+  </div>
+
+  <div class="row">
+    <label>Teléfono</label>
+    <input class="input" [(ngModel)]="form.telefono" name="telefono" />
+  </div>
+
+  <div class="row">
+    <label>Cliente ID</label>
+    <input class="input" [(ngModel)]="form.clienteId" name="clienteId" />
+  </div>
+
+  <div class="row">
+    <label>Contraseña</label>
+    <input class="input" type="password" [(ngModel)]="form.password" name="password" />
+  </div>
+
+  <div class="row">
+    <label>Estado</label>
+    <select class="input" [(ngModel)]="form.estado" name="estado">
+      <option [ngValue]="true">Activo</option>
+      <option [ngValue]="false">Inactivo</option>
+    </select>
+  </div>
+
+  <div class="actions">
+    <button (click)="guardar()">{{ form.id ? 'Actualizar' : 'Guardar' }}</button>
+    <button (click)="limpiar()">Limpiar</button>
+  </div>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Cliente ID</th>
+      <th>Identificación</th>
+      <th>Teléfono</th>
+      <th>Estado</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let c of clientesFiltrados()">
+      <td>{{ c.id }}</td>
+      <td>{{ c.nombre }}</td>
+      <td>{{ c.clienteId }}</td>
+      <td>{{ c.identificacion }}</td>
+      <td>{{ c.telefono }}</td>
+      <td>{{ c.estado }}</td>
+      <td>
+        <button (click)="editar(c)">Editar</button>
+        <button (click)="eliminar(c.id)">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,38 @@
+.shell {
+  display: flex;
+  min-height: 100vh;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.side {
+  width: 220px;
+  border-right: 1px solid #ddd;
+  padding: 16px;
+}
+
+.brand {
+  margin: 0 0 16px 0;
+  color: #1f4aa8;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.menu a {
+  display: block;
+  padding: 10px;
+  color: #333;
+  text-decoration: none;
+  border-radius: 2px;
+  margin-bottom: 6px;
+}
+
+.menu a.active {
+  background: #f0f0f0;
+  font-weight: bold;
+}
+
+.content {
+  flex: 1;
+  padding: 24px;
+  max-width: 900px;
+}

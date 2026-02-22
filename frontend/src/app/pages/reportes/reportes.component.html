@@ -1,0 +1,61 @@
+<h2>Reportes</h2>
+
+<div class="error" *ngIf="errorMsg">{{ errorMsg }}</div>
+
+<div class="form">
+  <div class="row">
+    <label>Cliente</label>
+    <select class="input" [(ngModel)]="clienteId" name="clienteId">
+      <option [ngValue]="''">-- Seleccione --</option>
+      <option *ngFor="let c of clientes" [ngValue]="c.clienteId">
+        {{ c.nombre }} ({{ c.clienteId }})
+      </option>
+    </select>
+  </div>
+
+  <div class="row">
+    <label>Desde</label>
+    <input class="input" type="date" [(ngModel)]="fechaInicio" name="fechaInicio" />
+  </div>
+
+  <div class="row">
+    <label>Hasta</label>
+    <input class="input" type="date" [(ngModel)]="fechaFin" name="fechaFin" />
+  </div>
+
+  <div class="actions">
+    <button (click)="consultar()">Consultar</button>
+    <button (click)="descargarPdf()" [disabled]="!reporte?.pdfBase64">Descargar PDF</button>
+    <button (click)="limpiar()">Limpiar</button>
+  </div>
+</div>
+
+<!-- Resumen -->
+<div *ngIf="reporte" class="card" style="margin-top: 12px;">
+  <p><b>Cliente:</b> {{ reporte.nombreCliente }} ({{ reporte.clienteId }})</p>
+  <p><b>Rango:</b> {{ reporte.fechaInicio }} a {{ reporte.fechaFin }}</p>
+  <p><b>Total Créditos:</b> {{ reporte.totalCreditos }}</p>
+  <p><b>Total Débitos:</b> {{ reporte.totalDebitos }}</p>
+</div>
+
+<!-- Cuentas -->
+<table class="table" *ngIf="reporte?.cuentas?.length">
+  <thead>
+    <tr>
+      <th>Número Cuenta</th>
+      <th>Tipo</th>
+      <th>Saldo Actual</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let c of reporte!.cuentas">
+      <td>{{ c.numeroCuenta }}</td>
+      <td>{{ c.tipoCuenta }}</td>
+      <td>{{ c.saldoActual }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf="!reporte" class="muted">
+  Sin datos. Selecciona filtros y presiona Consultar.
+</div>
