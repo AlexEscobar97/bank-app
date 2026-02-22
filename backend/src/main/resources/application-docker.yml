@@ -1,0 +1,24 @@
+server:
+  port: 8282
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: bank-backend
+
+  datasource:
+    url: jdbc:mysql://db:3306/bank_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: root
+    password: root12345
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+
+bank:
+  daily-withdraw-limit: 1000
